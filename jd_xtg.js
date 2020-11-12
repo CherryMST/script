@@ -152,12 +152,14 @@ async function showMsg() {
   if (zone === 0) {
     nowTime += 28800000;//UTC-0时区加上8个小时
   }
-  if (nowTime > new Date(activeEndTime).getTime()) {
-    $.msg($.name, '活动已结束', `请删除或禁用此脚本\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`, {"open-url": "https://github.com/lxk0301/jd_scripts"});
-    if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`)
-  } else {
-    $.msg($.name, `账号${$.index} ${$.nickName || $.UserName}`, `做任务之前京豆总计:${$.beanCount}\n做完任务后京豆总计:${$.jdNum}\n${($.jdNum - $.beanCount) > 0 ? `获得京豆：${$.jdNum - $.beanCount}京豆 🐶(仅供参考)\n` : ''}京豆先到先得\n活动地址点击弹窗跳转后即可查看\n注：如未获得京豆就是已被分完`, {"open-url": "https://prodev.m.jd.com/mall/active/3gSzKSnvrrhYushciUpzHcDnkYE3/index.html"})
-    if ($.isNode()) await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}`, `账号${$.index} ${$.nickName || $.UserName}\n做任务之前京豆总计:${$.beanCount}\n做完任务后京豆总计:${$.jdNum}\n${($.jdNum - $.beanCount) > 0 ? `获得京豆：${$.jdNum - $.beanCount}京豆 🐶(仅供参考)\n` : ''}京豆先到先得\n注：如未获得京豆就是已被分完\n活动地址：https://prodev.m.jd.com/mall/active/3gSzKSnvrrhYushciUpzHcDnkYE3/index.html`)
+  if(process.env.JD_XTG_NOTIFY_CONTROL){
+    if (nowTime > new Date(activeEndTime).getTime()) {
+      $.msg($.name, '活动已结束', `请删除或禁用此脚本\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`, {"open-url": "https://github.com/lxk0301/jd_scripts"});
+      if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`)
+    } else {
+      $.msg($.name, `账号${$.index} ${$.nickName || $.UserName}`, `做任务之前京豆总计:${$.beanCount}\n做完任务后京豆总计:${$.jdNum}\n${($.jdNum - $.beanCount) > 0 ? `获得京豆：${$.jdNum - $.beanCount}京豆 🐶(仅供参考)\n` : ''}京豆先到先得\n活动地址点击弹窗跳转后即可查看\n注：如未获得京豆就是已被分完`, {"open-url": "https://prodev.m.jd.com/mall/active/3gSzKSnvrrhYushciUpzHcDnkYE3/index.html"})
+      if ($.isNode()) await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}`, `账号${$.index} ${$.nickName || $.UserName}\n做任务之前京豆总计:${$.beanCount}\n做完任务后京豆总计:${$.jdNum}\n${($.jdNum - $.beanCount) > 0 ? `获得京豆：${$.jdNum - $.beanCount}京豆 🐶(仅供参考)\n` : ''}京豆先到先得\n注：如未获得京豆就是已被分完\n活动地址：https://prodev.m.jd.com/mall/active/3gSzKSnvrrhYushciUpzHcDnkYE3/index.html`)
+    }
   }
 }
 async function JD_XTG() {

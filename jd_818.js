@@ -906,11 +906,13 @@ function TotalBean() {
   })
 }
 async function showMsg() {
-  if (Date.now() > new Date(activeEndTime).getTime()) {
-    $.msg($.name, '活动已结束', `该活动累计获得京豆：${$.jbeanCount}个\niOS用户请删除此脚本\ngithub action用户请删除.github/workflows/jd_818.yml文件\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`, {"open-url": "https://github.com/lxk0301/jd_scripts"});
-    if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\ngithub action用户请删除.github/workflows/jd_818.yml文件\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\n https://github.com/lxk0301/jd_scripts`)
-  } else {
-    $.msg($.name, `京东账号${$.index} ${$.nickName || $.UserName}`, `${$.jbeanCount ? `${$.integer ? `今日获得积分：${$.integer}个\n` : ''}${$.num ? `今日排名：${$.num}\n` : ''}今日参数人数：${$.lasNum}人\n累计获得京豆：${$.jbeanCount}个🐶\n` : ''}${$.jbeanCount ? `累计获得积分：${$.integralCount}个\n` : ''}${$.jbeanNum ? `${$.date}日奖品：${$.jbeanNum}\n` : ''}具体详情点击弹窗跳转后即可查看`, {"open-url": "https://rdcseason.m.jd.com/#/hame"});
+  if(process.env.JD_818_NOTIFY_CONTROL){
+    if (Date.now() > new Date(activeEndTime).getTime()) {
+      $.msg($.name, '活动已结束', `该活动累计获得京豆：${$.jbeanCount}个\niOS用户请删除此脚本\ngithub action用户请删除.github/workflows/jd_818.yml文件\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`, {"open-url": "https://github.com/lxk0301/jd_scripts"});
+      if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\ngithub action用户请删除.github/workflows/jd_818.yml文件\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\n https://github.com/lxk0301/jd_scripts`)
+    } else {
+      $.msg($.name, `京东账号${$.index} ${$.nickName || $.UserName}`, `${$.jbeanCount ? `${$.integer ? `今日获得积分：${$.integer}个\n` : ''}${$.num ? `今日排名：${$.num}\n` : ''}今日参数人数：${$.lasNum}人\n累计获得京豆：${$.jbeanCount}个🐶\n` : ''}${$.jbeanCount ? `累计获得积分：${$.integralCount}个\n` : ''}${$.jbeanNum ? `${$.date}日奖品：${$.jbeanNum}\n` : ''}具体详情点击弹窗跳转后即可查看`, {"open-url": "https://rdcseason.m.jd.com/#/hame"});
+    }
   }
 }
 // prettier-ignore
