@@ -152,7 +152,7 @@ async function showMsg() {
   if (zone === 0) {
     nowTime += 28800000;//UTC-0时区加上8个小时
   }
-  if(process.env.JD_XTG_NOTIFY_CONTROL){
+  if(process.env.JD_XTG_NOTIFY_CONTROL && `${process.env.JD_XTG_NOTIFY_CONTROL}` === 'true'){
     if (nowTime > new Date(activeEndTime).getTime()) {
       $.msg($.name, '活动已结束', `请删除或禁用此脚本\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`, {"open-url": "https://github.com/lxk0301/jd_scripts"});
       if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\n如果帮助到您可以点下🌟STAR鼓励我一下,谢谢\n咱江湖再见\nhttps://github.com/lxk0301/jd_scripts`)
