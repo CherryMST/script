@@ -1,4 +1,4 @@
-/*
+﻿/*
  * @Author: lxk0301 https://github.com/lxk0301 
  * @Date: 2020-08-16 18:54:16
  * @Last Modified by: lxk0301
@@ -87,6 +87,7 @@ async function jdSuperMarket() {
   await receiveBlueCoin();//收蓝币（小费）
   await receiveLimitProductBlueCoin();//收限时商品的蓝币
   await smtgSign();//每日签到
+  await smtgBeanSign();
   await doDailyTask();//做日常任务，分享，关注店铺，
   await help();//商圈助力
   //await smtgQueryPkTask();//做商品PK任务
@@ -269,6 +270,27 @@ function smtgSign() {
           } else {
             message += `【第${$.todayDay}日签到】${data.data.bizMsg}\n`
           }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+
+function smtgBeanSign() {
+  return new Promise((resolve) => {
+    $.get(taskUrl('smtg_sign',{"channel": "1"}), async (err, resp, data) => {
+      try {
+        // console.log('ddd----ddd', data)
+        if (err) {
+          console.log('\n京小超: API查询请求失败 ‼️‼️')
+          console.log(JSON.stringify(err));
+        } else {
+          //data = JSON.parse(data);
+          console.log(data)
         }
       } catch (e) {
         $.logErr(e, resp);
