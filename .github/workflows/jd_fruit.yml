@@ -18,8 +18,9 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
-        run: |
-          git clone https://gitee.com/xjhitacst/jd_scripts.git ~/scripts
+        uses: actions/checkout@v2
+        with:
+          repository: CherryMST/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
